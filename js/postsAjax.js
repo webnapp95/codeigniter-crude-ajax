@@ -14,23 +14,8 @@ function manageData() {
         url: mybaseurl+"/api/movies/list",
         data: {page:page}
     }).done(function(data) {
-        //total_page = data.moviesData.total;
-        //last_page = data.moviesData.last_page;
-        //current_page = data.moviesData.current_page;
-        /*$('#pagination').twbsPagination({
-            //startPage: current_page,
-            //totalPages: last_page,
-            //visiblePages: 3,
-            onPageClick: function (event, pageL) {
-                page = pageL;
-                if(is_ajax_fire != 0){
-                  getPageData(page);
-                }
-            }
-        });*/
         manageRow(data.data.moviesData);
         $("#pagination").html(data.data.pagination);
-        //is_ajax_fire = 1;
     });
 }
 
@@ -70,6 +55,7 @@ function manageRow(data) {
 /* Create new Post */
 $(".crud-submit").click(function(e) {
     e.preventDefault();
+    console.log("submit");
     var form_action = $("#addModal").find("form").attr("action");
     var title = $("#addModal").find("input[name='title']").val();
     var year = $("#addModal").find("input[name='year']").val();
@@ -104,14 +90,15 @@ $("#pagination").click(function(e) {
 });
 /* Remove Post */
 $("body").on("click",".remove-item",function() {
+    console.log("submit");
     var id = $(this).parent("td").data('id');
     var mybaseurl='http://localhost/codeigniter-crude-ajax/';
     var base_url = mybaseurl;
     var c_obj = $(this).parents("tr");
     $.ajax({
         dataType: 'json',
-        type:'delete',
-        url: base_url + '/' + id,
+        type:'get',
+        url: base_url + 'api/movies/delete/' + id,
     }).done(function(data) {
         c_obj.remove();
         toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
@@ -141,6 +128,7 @@ $("body").on("click",".edit-item",function() {
 /* Updated new Post */
 $(".crud-submit-edit").click(function(e) {
     e.preventDefault();
+    console.log("submit");
     var form_action = $("#editModal").find("form").attr("action");
     var title = $("#editModal").find("input[name='title']").val();
     var year = $("#editModal").find("input[name='year']").val();

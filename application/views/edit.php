@@ -63,3 +63,13 @@
             </div>
         </div>
     </div>
+
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/bootstrap.css">
+
+    <link href="<?=base_url()?>css/toastr.min.css" rel="stylesheet">
+    <script type="text/javascript" src="<?=base_url()?>js/jquery.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/jquery.twbsPagination.min.js"></script>
+    <script src="<?=base_url()?>/js/validator.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/toastr.min.js"></script>
+    <script src="<?=base_url()?>js/postsAjax.js"></script> 

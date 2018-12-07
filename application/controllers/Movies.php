@@ -53,11 +53,9 @@ class Movies extends CI_Controller {
     	$this->load->library('pagination');
         // init params
         $params = array();
-        $limit_per_page = 1;
-        //echo $_GET['page'];exit;
+        $limit_per_page = 10;
         //$page = ($this->uri->segment(3)) ? ($this->uri->segment(3)) : 1;
-        $page = $_GET['page'] && $_GET['page'] >= 1 ? $_GET['page'] : 0;
-        //echo $page;exit;
+        $page = isset($_GET['page']) && $_GET['page']>=1 ? $_GET['page']-1 : 0;
         $params = [
         	'page_size' => $limit_per_page,
         	'page'      => $page,
@@ -110,7 +108,24 @@ class Movies extends CI_Controller {
             //echo json_encode($moviesData);
     }
 
-    private function successResponse($data = [])
+        /**
+     * Delete movie record by id.
+     *
+     * @param int    $id
+     * @return json
+     * @author Chigs Patel <info@webnappdev.in>
+     * @Date 3rd Nov 2018
+     */
+    public function deleteMovies($id) {
+        $data = ['is_active' => Movies::IS_IN_ACTIVE, 'deleted_at' => Date('Y-m-d H:i:s')];
+        $this->db->where('id', $id);
+        $isDeleted = $this->db->update('mytable', $data);
+        if ($isDeleted)
+        return $this->successResponse([], 'Deleted Records Successfull');
+        return $this->errorResponse('Something went wrong!');
+    }
+
+    private function successResponse($data = [], $msg = 'Success')
     {
         $response = [
             'code' => 0,
@@ -122,9 +137,17 @@ class Movies extends CI_Controller {
                     ->set_output(json_encode($response));
     }
 
-    private function errorResponse($data = [])
+    private function errorResponse($msg = 'Error', $data = [])
     {
-        
+        $response = [
+            'code' => -1,
+            'data' => $data,
+            'msg'  => $msg,
+        ];
+        $this->output->set_status_header(200)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode($response));
+
     }
 
 }

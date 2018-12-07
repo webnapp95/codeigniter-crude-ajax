@@ -7,7 +7,7 @@
                     <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form" 'enctype' = 'multipart/form-data' action = "{{base_url('/api/movies/createMovies')}}">
+                    <form class="form-horizontal" role="form" 'enctype' = 'multipart/form-data' action = <?=base_url('/api/movies/createMovies')?>>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="title">Title:</label>
                             <div class="col-sm-10">
@@ -61,3 +61,12 @@
         </div>
     </div>
 
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/bootstrap.css">
+
+    <link href="<?=base_url()?>css/toastr.min.css" rel="stylesheet">
+    <script type="text/javascript" src="<?=base_url()?>js/jquery.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/jquery.twbsPagination.min.js"></script>
+    <script src="<?=base_url()?>/js/validator.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/toastr.min.js"></script>
+    <script src="<?=base_url()?>js/postsAjax.js"></script> 
