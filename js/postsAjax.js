@@ -177,7 +177,7 @@ function readURL(input) {
 
     }
     var mybaseurl='http://localhost/codeigniter-crude-ajax/';
-    var base_url = mybaseurl+'api/imageUpload';
+    var base_url = mybaseurl+'api/movies/image/upload';
     var fdata = new FormData();
     fdata.append("image", input.files[0]);
     $.ajax({
@@ -188,8 +188,8 @@ function readURL(input) {
         processData: false,
         contentType: false,
     }).done(function(data){
-      $('#blah').attr("src",data.imageName);
-      $("img").attr("src",data.imageName);
+      $('#blah').attr("src", mybaseurl+"uploads/"+data.data.upload_data.client_name);
+      $("img").attr("src", mybaseurl+"uploads/"+data.data.upload_data.client_name);
       $('#blah').hide();
       $('#blah').fadeIn(650);
     });
