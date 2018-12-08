@@ -151,6 +151,7 @@ class Movies extends CI_Controller {
         return $this->errorResponse('Something went wrong!');
     }
 
+    public function imageUpload()
     {
         $config['upload_path']          = 'C:\xampp\htdocs\codeigniter-crude-ajax\uploads';
         $config['allowed_types']        = 'gif|jpg|png';
