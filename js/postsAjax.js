@@ -29,6 +29,7 @@ function getPageData(page = 1) {
         url: base_url+"/api/movies/list?page="+page,
         data: {page:page}
     }).done(function(data) {
+        $("#pagination").html(data.data.pagination);
         manageRow(data.data.moviesData);
     });
 }
