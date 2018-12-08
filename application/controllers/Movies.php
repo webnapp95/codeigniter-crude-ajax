@@ -116,12 +116,38 @@ class Movies extends CI_Controller {
      * @author Chigs Patel <info@webnappdev.in>
      * @Date 3rd Nov 2018
      */
-    public function deleteMovies($id) {
-        $data = ['is_active' => Movies::IS_IN_ACTIVE, 'deleted_at' => Date('Y-m-d H:i:s')];
+    public function deleteMovies() {
+        $id = $this->input->get('id');
+        $data = ['is_active' => 1, 'deleted_at' => Date('Y-m-d H:i:s')];
         $this->db->where('id', $id);
-        $isDeleted = $this->db->update('mytable', $data);
+        $isDeleted = $this->db->update('movies', $data);
         if ($isDeleted)
         return $this->successResponse([], 'Deleted Records Successfull');
+        return $this->errorResponse('Something went wrong!');
+    }
+
+    public function createMovies()
+    {
+        $params = $this->input->post();
+        if (empty($params)) {
+            return $this->errorResponse('Params Error!');
+        }
+        $isAdd = $this->Main_model->addMovies($params);
+        if ($isAdd)
+        return $this->successResponse([], 'Add Records Successfull');
+        return $this->errorResponse('Something went wrong!');
+
+    }
+
+    public function updateMovies()
+    {
+        $params = $this->input->post();
+        if (!isset($params['id']) || empty($params['id'])) {
+            return $this->errorResponse('Params Error!');
+        }
+        $isUpdate = $this->Main_model->updateMovies($params['id'], $params);
+        if ($isUpdate)
+        return $this->successResponse([], 'Add Records Successfull');
         return $this->errorResponse('Something went wrong!');
     }
 

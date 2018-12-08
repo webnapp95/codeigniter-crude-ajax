@@ -51,15 +51,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = "movies";
 $route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
 
-$route['/'] = 'movies';
+//$route['/'] = 'movies';
 
 //api call
 $route['api/movies/list'] = 'movies/getList';
 $route['api/movies/list/{id}'] = 'movies/getList';
 $route['api/movies/create'] = 'movies/createMovies'; 
-$route['api/movies/update/{id}'] = 'movies/updateMovies'; 
-$route['api/movies/delete/{id}'] = 'movies/deleteMovies'; 
+$route['api/movies/update'] = 'movies/updateMovies'; 
+$route['api/movies/delete'] = 'movies/deleteMovies'; 
 $route['api/movies/image/upload'] = 'movies/imageUpload'; 
 
-$route['translate_uri_dashes'] = TRUE;

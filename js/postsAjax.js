@@ -29,7 +29,6 @@ function getPageData(page = 1) {
         url: base_url+"/api/movies/list?page="+page,
         data: {page:page}
     }).done(function(data) {
-        console.log(data.data.moviesData);
         manageRow(data.data.moviesData);
     });
 }
@@ -55,7 +54,6 @@ function manageRow(data) {
 /* Create new Post */
 $(".crud-submit").click(function(e) {
     e.preventDefault();
-    console.log("submit");
     var form_action = $("#addModal").find("form").attr("action");
     var title = $("#addModal").find("input[name='title']").val();
     var year = $("#addModal").find("input[name='year']").val();
@@ -98,7 +96,7 @@ $("body").on("click",".remove-item",function() {
     $.ajax({
         dataType: 'json',
         type:'get',
-        url: base_url + 'api/movies/delete/' + id,
+        url: base_url + 'api/movies/delete?id='+id,
     }).done(function(data) {
         c_obj.remove();
         toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
@@ -109,7 +107,7 @@ $("body").on("click",".remove-item",function() {
 /* Edit Post */
 $("body").on("click",".edit-item",function() {
     var mybaseurl='http://localhost/codeigniter-crude-ajax/';
-    var base_url = mybaseurl+'api/movies/updateMovies';
+    var base_url = mybaseurl+'api/movies/update';
     var id = $(this).parent("td").data('id');
     var title = $(this).parent("td").prev("td").prev("td").text();
     var year = $(this).parent("td").prev("td").prev("td").prev("td").text();
@@ -122,7 +120,7 @@ $("body").on("click",".edit-item",function() {
     $("#editModal").find("input[name='title']").val(title);
     $("#editModal").find("input[name='year']").val(year);
     $("#editModal").find("textarea[name='description']").val(description);
-    $("#editModal").find("form").attr("action",base_url + '/' + id);
+    $("#editModal").find("form").attr("action",base_url);
 });
 
 /* Updated new Post */
@@ -130,6 +128,7 @@ $(".crud-submit-edit").click(function(e) {
     e.preventDefault();
     console.log("submit");
     var form_action = $("#editModal").find("form").attr("action");
+    var id = $("#editModal").find("input[name='id']").val();
     var title = $("#editModal").find("input[name='title']").val();
     var year = $("#editModal").find("input[name='year']").val();
     var description = $("#editModal").find("textarea[name='description']").val();
@@ -138,7 +137,7 @@ $(".crud-submit-edit").click(function(e) {
         dataType: 'json',
         type:'POST',
         url: form_action,
-        data:{title:title, description:description,year:year,image:image}
+        data:{id:id, title:title, description:description,year:year,image:image}
     }).done(function(data){
         getPageData();
         $(".modal").modal('hide');

@@ -7,7 +7,7 @@
                     <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form" 'enctype' = 'multipart/form-data' action = <?=base_url('/api/movies/createMovies')?>>
+                    <form class="form-horizontal" role="form" 'enctype' = 'multipart/form-data' action = <?=base_url('/api/movies/create')?>>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="title">Title:</label>
                             <div class="col-sm-10">
